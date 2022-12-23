@@ -1,0 +1,18 @@
+.container{
+    max-width: 600px;
+    margin-top: 100px;
+    background-color: beige;
+    /*bo tròn các viền*/
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px 20px;
+}
+.mb-3{
+    padding: 10px;
+}
+/*.btn btn-info{*/
+/*    margin-left: 250px;*/
+/*}*/
+.text-center{
+    padding: 10px;
+}
