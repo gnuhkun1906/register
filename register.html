@@ -58,7 +58,9 @@
     let isCheck;// check cả vùng ô đăng kí có đúng hay không?
     let user = new User()
     let arr = JSON.parse(localStorage.getItem('ListUser'));//lưu vào localstorage dưới dạng JSON.
-    // console.log(submit)
+    if (arr == null) {// nếu là null thì sẽ trả  về mảng rỗng
+        arr = []
+    }
     function validate() {
         let check = true;
         let username = userNameInput.value;
@@ -67,9 +69,7 @@
         let rePassword = rePasswordInput.value;
         const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;//Mẫu email để chấp nhận email nhập vào
         const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/// Mẫu password
-        if (arr == null) {// nếu là null thì sẽ trả  về mảng rỗng
-            arr = []
-        }
+
         if (username.trim() == '') {
             document.querySelector('#falseUsername').innerText = "Không được để trống đâu nhá!"
             check = false;
@@ -103,7 +103,7 @@
         } else if (!PASSWORD_PATTERN.test(password)) {
             document.querySelector('#falsePassword').innerText = "Bạn cần phải nhập mật khẩu có 1 kí tự in hoa và kí tự số!"
             check = false;
-        } else if (checkEmailPassword(password)) {
+        } else if (checkPasswordExist(password)) {
             document.querySelector('#falsePassword').innerText = "Password này đã tồn tại, vui lòng nhập password khác"
         } else {
             document.querySelector('#falsePassword').innerText = "";
@@ -146,7 +146,7 @@
         }
         return false
     }
-    function checkEmailPassword(password) {// Check password
+    function checkPasswordExist(password) {// Check password
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].password === password) {
                 return true;
